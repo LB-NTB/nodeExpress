@@ -35,8 +35,25 @@ html(lang='en')
 			}
 			.row.content {height:auto;}
 			}
+
+		if showTests
+			link(rel='stylesheet', href='/external/mocha.css')
+
 	body
 		include navigation
+
+		if showTests
+			#mocha
+			script(src='/external/mocha.js')
+			script(src='/external/chai.js')
+			script.
+				mocha.ui('tdd');
+				var assert = chai.assert;
+			script(src='/tests/global.js')
+			if testScript
+				script(src='#testScript')
+			script.
+				mocha.run();
 		
 		.container-fluid.text-center
 			block content
